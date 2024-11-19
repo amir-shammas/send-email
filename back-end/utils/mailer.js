@@ -33,13 +33,33 @@ const transporterDetails = smtpTransport({
 // });
 
 
+// exports.sendEmail = (email, username, subject, message) => {
+//     const transporter = nodeMailer.createTransport(transporterDetails);
+//     transporter.sendMail({
+//         from: "no-reply@react-cafe.ir",
+//         to: email,
+//         subject: subject,
+//         html: `<h1> سلام ${username}</h1>
+//             <h2>${message}</h2>`,
+//     });
+// };
+
+
 exports.sendEmail = (email, username, subject, message) => {
+
     const transporter = nodeMailer.createTransport(transporterDetails);
-    transporter.sendMail({
+
+    const options = {
         from: "no-reply@react-cafe.ir",
         to: email,
         subject: subject,
-        html: `<h1> سلام ${username}</h1>
-            <h2>${message}</h2>`,
+        html: ` <h1> سلام ${username}</h1>
+                <h2>${message}</h2>
+              `,
+    }
+
+    transporter.sendMail(options, (err, info) => {
+        if (err) return console.log({message:"No mail sent !"});
+        console.log({message:"Mail sent successfully !", info: info});
     });
 };

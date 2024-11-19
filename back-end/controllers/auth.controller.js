@@ -55,7 +55,7 @@ exports.register = async (req, res, next) => {
       "ثبت نام شما با موفقیت انجام شد !",
     );
 
-    return res.status(201).json({ user: userObject, accessToken });
+    return res.status(201).json({ message: "New user registered successfully !", user: userObject, accessToken });
   } catch (error) {
     next(error);
   }
